@@ -1,0 +1,66 @@
+﻿@model IEnumerable<MVC_ComponentesCodeFirst.Models.Ordenador>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Crear nuevo ordenador</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Propietario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Componentes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+	        <th>
+                @Html.DisplayNameFor(model => model.PedidoId)
+	        </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Propietario)
+            </td>
+            <td>
+               @foreach (var itemMostrar in item.Componentes!)
+                        {
+                            <strong> <nbsp>@Html.DisplayFor(item=>itemMostrar.Categoria)</nbsp></strong>
+	                        @Html.DisplayFor(item=>itemMostrar.NumeroDeSerie)
+                            <br/>
+                        }
+              
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+	        <td>
+                @Html.DisplayFor(modelItem=>item.PedidoId)
+	        </td>
+	        <td>
+		        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+		        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+		        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+	        </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>
